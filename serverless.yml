@@ -1,0 +1,19 @@
+service: cep
+
+provider:
+    name: aws
+    region: sa-east-1
+    runtime: provided
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    consulta:
+        handler: index.php
+        description: ''
+        timeout: 30
+        layers:
+            - ${bref:layer.php-73-fpm}
+        events:
+            -   http: 'GET /cep/{cep}'
